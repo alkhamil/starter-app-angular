@@ -1,0 +1,51 @@
+<div class="container vh-100">
+    <div class="row vh-100 justify-content-center align-items-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5 class="m-0">Login</h5>
+                </div>
+                <div class="card-body m-3">
+                    <ngb-alert *ngIf="error" [type]="'danger'" (closed)="onCloseError()">{{ errorMessage }}</ngb-alert>
+                    <form [formGroup]="form">
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="text" formControlName="email" placeholder="enter your email"
+                                class="form-control"
+                                [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched || submitted)}">
+
+                            <div class="invalid-feedback d-block"
+                                *ngIf="email.invalid && (email.dirty || email.touched || submitted)">
+                                <div *ngIf="email.errors?.['required']">
+                                    email is required.
+                                </div>
+                                <div *ngIf="email.errors?.['email']">
+                                    email not valid.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" formControlName="password" placeholder="enter your password"
+                                class="form-control"
+                                [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched || submitted)}">
+
+                            <div class="invalid-feedback d-block"
+                                *ngIf="password.invalid && (password.dirty || password.touched || submitted)">
+                                <div *ngIf="password.errors?.['required']">
+                                    password is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <button class="btn w-100 btn-primary" [disabled]="loading" (click)="onClickSubmit()">
+                                <i class="fa fa-spin fa-spinner" *ngIf="loading"></i> Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
